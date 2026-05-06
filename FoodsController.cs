@@ -32,10 +32,9 @@ public class FoodsController : ControllerBase
         [FromQuery] string? cuisine,
         [FromQuery] string? cuisineType,
         [FromQuery] string? taste,
-        [FromQuery] int? maxCalories,
-        [FromQuery] int? minProtein)
+        [FromQuery] int? maxCalories)
     {
-        var query = BuildQuery(mood, cuisine, cuisineType, taste, maxCalories, minProtein);
+        var query = BuildQuery(mood, cuisine, cuisineType, taste, maxCalories);
         return Ok(await query.ToListAsync());
     }
 
@@ -49,10 +48,9 @@ public class FoodsController : ControllerBase
         [FromQuery] string? cuisine,
         [FromQuery] string? cuisineType,
         [FromQuery] string? taste,
-        [FromQuery] int? maxCalories,
-        [FromQuery] int? minProtein)
+        [FromQuery] int? maxCalories)
     {
-        var query = BuildQuery(mood, cuisine, cuisineType, taste, maxCalories, minProtein);
+        var query = BuildQuery(mood, cuisine, cuisineType, taste, maxCalories);
         var foods = await query.ToListAsync();
 
         if (foods.Count == 0)
@@ -119,8 +117,7 @@ public class FoodsController : ControllerBase
         string? cuisine,
         string? cuisineType,
         string? taste,
-        int? maxCalories,
-        int? minProtein)
+        int? maxCalories)
     {
         var query = _db.Foods.AsQueryable();
 
@@ -138,9 +135,6 @@ public class FoodsController : ControllerBase
 
         if (maxCalories.HasValue)
             query = query.Where(f => f.Calories <= maxCalories.Value);
-
-        if (minProtein.HasValue)
-            query = query.Where(f => f.ProteinG >= minProtein.Value);
 
         return query;
     }

@@ -20,9 +20,9 @@ public class Food
 
     // Nutrition — all numeric now (per standard serving)
     public int Calories { get; set; }
-    public int ProteinG { get; set; }   // grams
-    public int CarbsG { get; set; }     // grams
-    public int FatG { get; set; }       // grams
+    public string Protein { get; set; } = string.Empty;
+    public string Carbs { get; set; } = string.Empty;
+    public string Fat { get; set; } = string.Empty;
 
     public string Emoji { get; set; } = string.Empty;
 }
