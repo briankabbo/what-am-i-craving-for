@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K0Poyq25TaI=",
+  "dgSpecHash": "o7kzJ+rY3iY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\FoodPickerAPI\\FoodPickerAPI.csproj",
+  "projectFilePath": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\what-am-i-craving-for\\FoodPickerAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NOC-02\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\NOC-02\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.13\\microsoft.aspnetcore.openapi.9.0.13.nupkg.sha512",

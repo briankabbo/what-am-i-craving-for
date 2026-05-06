@@ -3,32 +3,55 @@ using FoodPickerAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// MySQL Connection
+// ── Database ──────────────────────────────────────────────────────
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// CORS — allow React frontend
+// ── CORS — allow React frontend ───────────────────────────────────
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "http://localhost:3000")
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
 
+// ── Services ──────────────────────────────────────────────────────
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "FoodPicker API", Version = "v1" });
+});
+
+// ── Problem Details (structured error responses) ──────────────────
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
+// ── Global exception handler ──────────────────────────────────────
+app.UseExceptionHandler(err => err.Run(async context =>
+{
+    context.Response.StatusCode = 500;
+    context.Response.ContentType = "application/json";
+    await context.Response.WriteAsJsonAsync(new
+    {
+        message = "An unexpected error occurred. Please try again later."
+    });
+}));
+
+// ── Dev tools ─────────────────────────────────────────────────────
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FoodPicker API v1"));
 }
 
+// ── Middleware pipeline ───────────────────────────────────────────
+app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthorization();
 app.MapControllers();

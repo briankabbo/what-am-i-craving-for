@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FoodPickerAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f20fd9a0bf2b77025423eb356d4c0016a7a82b50")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a3065e0559801ed2760c065225081bb6ee9dc30")]
 [assembly: System.Reflection.AssemblyProductAttribute("FoodPickerAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FoodPickerAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

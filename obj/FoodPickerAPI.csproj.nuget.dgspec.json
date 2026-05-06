@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\FoodPickerAPI\\FoodPickerAPI.csproj": {}
+    "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\what-am-i-craving-for\\FoodPickerAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\FoodPickerAPI\\FoodPickerAPI.csproj": {
+    "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\what-am-i-craving-for\\FoodPickerAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\FoodPickerAPI\\FoodPickerAPI.csproj",
+        "projectUniqueName": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\what-am-i-craving-for\\FoodPickerAPI.csproj",
         "projectName": "FoodPickerAPI",
-        "projectPath": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\FoodPickerAPI\\FoodPickerAPI.csproj",
+        "projectPath": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\what-am-i-craving-for\\FoodPickerAPI.csproj",
         "packagesPath": "C:\\Users\\NOC-02\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\FoodPickerAPI\\obj\\",
+        "outputPath": "C:\\Users\\NOC-02\\Documents\\Kabbo Essentials\\what-am-i-craving-for\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
