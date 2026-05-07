@@ -9,12 +9,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // ── CORS — allow React frontend ───────────────────────────────────
+var allowedOrigins = builder.Configuration["AllowedOrigins"]?
+    .Split(",", StringSplitOptions.RemoveEmptyEntries)
+    ?? new[] { "http://localhost:5173", "http://localhost:3000" };
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins(
-                "http://localhost:5173",
-                "http://localhost:3000")
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
