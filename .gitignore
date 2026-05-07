@@ -1,0 +1,10 @@
+# User-specific files
+*.user
+.vs/
+
+# Build output
+bin/
+obj/
+
+# Production secrets — NEVER commit these
+appsettings.Production.json
