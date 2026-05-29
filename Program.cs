@@ -6,7 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 //Database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 45))));
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 45)),
+    mySqlOptions => mySqlOptions.EnableRetryOnFailure(
+        maxRetryCount: 5,
+        maxRetryDelay: TimeSpan.FromSeconds(30),
+        errorNumbersToAdd: null)));
 
 //CORS
 var allowedOrigins = builder.Configuration["AllowedOrigins"]?
