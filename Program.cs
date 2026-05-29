@@ -3,12 +3,12 @@ using FoodPickerAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ── Database ──────────────────────────────────────────────────────
+//Database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// ── CORS — allow React frontend ───────────────────────────────────
+//CORS
 var allowedOrigins = builder.Configuration["AllowedOrigins"]?
     .Split(",", StringSplitOptions.RemoveEmptyEntries)
     ?? new[] { "http://localhost:5173", "http://localhost:3000" };
@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod());
 });
 
-// ── Services ──────────────────────────────────────────────────────
+//Services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -29,12 +29,12 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "FoodPicker API", Version = "v1" });
 });
 
-// ── Problem Details (structured error responses) ──────────────────
+//Problem Details
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-// ── Global exception handler ──────────────────────────────────────
+//Global exception handler
 app.UseExceptionHandler(err => err.Run(async context =>
 {
     context.Response.StatusCode = 500;
@@ -45,17 +45,24 @@ app.UseExceptionHandler(err => err.Run(async context =>
     });
 }));
 
-// ── Dev tools ─────────────────────────────────────────────────────
+//Dev tools
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FoodPicker API v1"));
 }
 
-// ── Middleware pipeline ───────────────────────────────────────────
+//Middleware pipeline
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthorization();
 app.MapControllers();
+
+//Auto-run migrations on startup
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
