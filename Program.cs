@@ -60,7 +60,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
+app.MapMethods("/health", new[] { "GET", "HEAD" }, () => Results.Ok(new { status = "healthy" }));;
 app.MapControllers();
 
 //Auto-run migrations on startup
