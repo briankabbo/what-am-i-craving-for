@@ -60,7 +60,11 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.MapMethods("/health", new[] { "GET", "HEAD" }, () => Results.Ok(new { status = "healthy" }));;
+app.MapMethods("/health", new[] { "GET", "HEAD" }, () => Results.Ok(new { status = "healthy" }));
+app.MapMethods("/api/ping", new[] { "GET", "HEAD" }, async (AppDbContext db) => {
+    await db.Foods.CountAsync();
+    return Results.Ok(new { status = "alive" });
+});
 app.MapControllers();
 
 //Auto-run migrations on startup
