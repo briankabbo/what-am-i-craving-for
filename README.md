@@ -1,21 +1,23 @@
 # What Am I Craving For? (Backend API)
 
-This is the backend API for **What Am I Craving For?** A food-picker application that knows what you want, even when you absolutely do not.
-**Frontend Repo:** [Repo Link](https://github.com/briankabbo/what-am-i-craving-for-frontend)
+[![Live API](https://img.shields.io/badge/Backend%20API-Render-46E3B7?style=for-the-badge)](https://what-am-i-craving-for.onrender.com)
+[![Frontend Repo](https://img.shields.io/badge/Frontend%20Repo-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/briankabbo/what-am-i-craving-for-frontend)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-cravingwhat.vercel.app-orange?style=for-the-badge)](https://cravingwhat.vercel.app/)
 
->  **Status: Work In Progress**
+
+This is the backend API for **What Am I Craving For?** A food-picker application that knows what you want, even when you absolutely do not.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | .NET 9 (ASP.NET Core Web API) |
-| Language | C# |
-| Database | Microsoft SQL Server (MSSQL) |
-| ORM | Entity Framework Core |
-| API Style | RESTful |
+| Layer      | Technology                      |
+| ---------- | ------------------------------- |
+| Framework  | .NET 9 (ASP.NET Core Web API)   |
+| Language   | C#                              |
+| Database   | Microsoft SQL Server (MSSQL)    |
+| ORM        | Entity Framework Core           |
+| API Style  | RESTful                         |
 
 ---
 
@@ -23,15 +25,15 @@ This is the backend API for **What Am I Craving For?** A food-picker application
 
 ```
 what-am-i-craving-for/
-├── AppDbContext.cs           # EF Core database context — the brain connecting code to database
-├── Food.cs                   # Food model — represents a food item
-├── Favourite.cs              # Favourite model — represents a saved favourite
-├── FoodsController.cs        # Handles all food-related API endpoints
-├── FavouritesController.cs   # Handles all favourites-related API endpoints
-├── Program.cs                # App entry point and service configuration
-├── Migrations/               # EF Core database migrations
-├── appsettings.json          # App configuration (connection strings, etc.)
-└── appsettings.Development.json  # Dev-specific overrides
+├── AppDbContext.cs                  # EF Core database context — the brain connecting code to database
+├── Food.cs                          # Food model — represents a food item
+├── Favourite.cs                     # Favourite model — represents a saved favourite
+├── FoodsController.cs               # Handles all food-related API endpoints
+├── FavouritesController.cs          # Handles all favourites-related API endpoints
+├── Program.cs                       # App entry point and service configuration
+├── Migrations/                      # EF Core database migrations
+├── appsettings.json                 # App configuration (connection strings, etc.)
+└── appsettings.Development.json     # Dev-specific overrides
 ```
 
 ---
@@ -87,22 +89,32 @@ The API will start up and by default be available at `https://localhost:5001` or
 
 ### Foods
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/foods` | Get all available foods |
-| GET | `/api/foods/{id}` | Get a specific food by ID |
-| POST | `/api/foods` | Add a new food |
-| PUT | `/api/foods/{id}` | Update an existing food |
-| DELETE | `/api/foods/{id}` | Delete a food |
+| Method | Endpoint                | Description                                           |
+| ------ | ----------------------- | ----------------------------------------------------- |
+| GET    | `/api/foods`            | Get all foods — supports optional query params below  |
+| GET    | `/api/foods/random`     | Get one random food — supports the same query params  |
+| GET    | `/api/foods/moods`      | Get all available moods with emoji and descriptions   |
+| GET    | `/api/foods/cuisines`   | Get all distinct cuisines in the database             |
+| GET    | `/api/foods/{id}`       | Get a single food item by ID                          |
+
+**Supported query params for `/api/foods` and `/api/foods/random`:**
+
+| Param         | Example              | Description                     |
+| ------------- | -------------------- | ------------------------------- |
+| `mood`        | `?mood=Happy`        | Filter by mood                  |
+| `cuisine`     | `?cuisine=Korean`    | Filter by cuisine               |
+| `cuisineType` | `?cuisineType=Asian` | Filter by cuisine type          |
+| `taste`       | `?taste=spicy`       | Filter by taste profile         |
+| `maxCalories` | `?maxCalories=500`   | Filter by maximum calorie count |
 
 ### Favourites
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/favourites` | Get all saved favourites |
-| GET | `/api/favourites/{id}` | Get a specific favourite |
-| POST | `/api/favourites` | Save a food as a favourite |
-| DELETE | `/api/favourites/{id}` | Remove a food from favourites |
+| Method | Endpoint                         | Description                                   |
+| ------ | -------------------------------- | --------------------------------------------- |
+| GET    | `/api/favourites`                | Get all saved favourites with food details    |
+| POST   | `/api/favourites`                | Save a food as a favourite `{ "foodId": 5 }` |
+| DELETE | `/api/favourites/{id}`           | Remove a favourite by ID                      |
+| GET    | `/api/favourites/check/{foodId}` | Check if a specific food is already saved     |
 
 ---
 
@@ -110,15 +122,14 @@ The API will start up and by default be available at `https://localhost:5001` or
 
 This API is one half of the full project. The frontend is a React + Vite application that consumes this API and presents the user with a friendly interface to discover and save their cravings.
 
-👉 [Frontend Repository](https://github.com/briankabbo/what-am-i-craving-for-frontend)
+### ➜ [Frontend Repository](https://github.com/briankabbo/what-am-i-craving-for-frontend)
 
 ---
 
 ## 🤝 Contributing
 
-This project is a work in progress and contributions are welcome! If you spot a bug, have an idea, or just want to add more food options (priorities, right?), feel free to open an issue or submit a pull request.
+Contributions are welcome! If you spot a bug, have an idea, or just want to add more food options (priorities, right?), feel free to open an issue or submit a pull request.
 
 ---
 
 *Built with hunger and a little too much ambition. 🍜*
-> Stay tuned as things are built, broken, and fixed in that exact order.
