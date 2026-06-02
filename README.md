@@ -15,7 +15,7 @@ This is the backend API for **What Am I Craving For?** A food-picker application
 | ---------- | ------------------------------- |
 | Framework  | .NET 9 (ASP.NET Core Web API)   |
 | Language   | C#                              |
-| Database   | Microsoft SQL Server (MSSQL)    |
+| Database   | MySQL (hosted on Aiven Cloud)   |
 | ORM        | Entity Framework Core           |
 | API Style  | RESTful                         |
 
@@ -45,8 +45,13 @@ what-am-i-craving-for/
 Make sure you have the following installed before you even think about running this:
 
 - [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [MySQL](https://www.mysql.com/downloads/) or a free [Aiven Cloud](https://aiven.io/) MySQL cluster
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) or [VS Code](https://code.visualstudio.com/) with the C# extension
+- [EF Core CLI tools](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) - Install globally by running:
+
+```bash
+dotnet tool install --global dotnet-ef
+```
 
 ### Installation and Setup
 
@@ -57,15 +62,15 @@ git clone https://github.com/briankabbo/what-am-i-craving-for.git
 cd what-am-i-craving-for
 ```
 
-**Step 2.** Open `appsettings.json` and update the connection string to point to your local SQL Server instance.
+**Step 2.** Open `appsettings.json` and update the connection string to point to your MySQL instance.
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=FoodPickerDB;Trusted_Connection=True;TrustServerCertificate=True;"
+  "DefaultConnection": "Server=YOUR_HOST;Port=YOUR_PORT;Database=YOUR_DB_NAME;User=YOUR_USER;Password=YOUR_PASSWORD;SslMode=Required;AllowPublicKeyRetrieval=True;"
 }
 ```
 
-Replace `YOUR_SERVER_NAME` with your actual SQL Server name (often `localhost` or `.\SQLEXPRESS`).
+> **Note:** You can use a local MySQL instance or create a free MySQL cluster on [Aiven Cloud](https://aiven.io/). If using Aiven, copy the connection details from your service dashboard and paste them in here.
 
 **Step 3.** Apply the database migrations to create your database schema.
 
@@ -73,15 +78,14 @@ Replace `YOUR_SERVER_NAME` with your actual SQL Server name (often `localhost` o
 dotnet ef database update
 ```
 
-This reads the `Migrations/` folder and sets up all the tables for you automatically. Entity Framework is doing the heavy lifting here so you do not have to write SQL by hand.
+This reads the `Migrations/` folder and sets up all the tables automatically. Entity Framework is doing the heavy lifting here so you do not have to write SQL by hand.
 
 **Step 4.** Run the API.
 
 ```bash
 dotnet run
 ```
-
-The API will start up and by default be available at `https://localhost:5001` or `http://localhost:5000`.
+The API will be available at `http://localhost:5174`.
 
 ---
 
