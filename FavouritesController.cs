@@ -52,7 +52,7 @@ public class FavouritesController : ControllerBase
         return CreatedAtAction(nameof(GetFavourites), new { id = created.Id }, created);
     }
 
-    // DELETE /api/favourites/{id}
+    // DELETE /api/favourites
     [HttpDelete("{id}")]
     public async Task<IActionResult> RemoveFavourite(int id)
     {
@@ -65,7 +65,7 @@ public class FavouritesController : ControllerBase
         return NoContent();
     }
 
-    // GET /api/favourites/check/{foodId}
+    // GET /api/favourites
     // Check if a specific food is already favourited
     [HttpGet("check/{foodId}")]
     public async Task<IActionResult> CheckFavourite(int foodId)
