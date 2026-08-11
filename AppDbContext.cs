@@ -12,6 +12,11 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Favourite>()
+            .HasIndex(f => f.SessionId);
+
         modelBuilder.Entity<Food>().HasData(
 
             // HAPPY? Sweet · Bold · Celebratory
