@@ -5,7 +5,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-cravingwhat.vercel.app-orange?style=for-the-badge)](https://cravingwhat.vercel.app/)
 
 
-This is the backend API for **What Am I Craving For?** A food-picker application that knows what you want, even when you absolutely do not.
+This is the backend API for **What Am I Craving For?** A food-picker application that lets you choose your next meal, even when you absolutely don't have any idea what to eat.
 
 ---
 
